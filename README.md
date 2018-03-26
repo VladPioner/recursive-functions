@@ -121,7 +121,7 @@ function getTreeMenuFromDegree($category_degree,$category_id = 0,$link = &quot;h
 }
 </pre>
 <p>Если вы не хотите чтоб в href ссылки при каждой последующей вложенности категории добавлялась родительская категория то следует убрать из функции параметр $link, а в href ссылки записываем $cat[&apos;alias&apos;]:</p>
-<pre>
+<code>
 function getTreeMenuFromDegree($category_degree,$category_id = 0){
     echo &apos;<ul>&apos;;
     foreach ($category_degree[$category_id] as $cat){
@@ -132,5 +132,5 @@ function getTreeMenuFromDegree($category_degree,$category_id = 0){
     }
     echo &apos;</ul>&apos;;
 }
-</pre>
+</code>
 
