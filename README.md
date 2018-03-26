@@ -134,3 +134,39 @@ function getTreeMenuFromDegree($category_degree,$category_id = 0){
 }
 </pre>
 
+<h3>1.2	Из массива категорий который мы получили из БД рекурсивно получаем массив вложенных в друг друга категорий (с неограниченной вложенностью), а после из этого массива, также рекурсивно, получаем меню в виде HTML</h3>
+<p>Этот способ является менее производительным так как используются две рекурсивных функции, поэтому он является менее предпочтительным, но при этом имеет большую гибкость</p>
+<p>Итак для этого способа нам понадобится две функции:</p>
+<p><b>- Получение массив вложенных в друг друга категорий</b></p>
+<pre>
+function getTreeRecurs($category_degree,$category_id = 0){
+    $tree = [];
+    foreach($category_degree[$category_id] as $id=>$val){
+        $tree[$id] = $val;
+        if(isset($category_degree[$id])){
+            $tree[$id]['children'] = getTreeRecurs($category_degree,$id);
+        }
+    }
+    return $tree;
+}
+</pre>
+<p><b>- получение вывод меню в виде HTML </b></p>
+<pre>
+function getTreeMenu($arr_tree,$link = ''){
+    echo '&lt;ul>';
+    foreach ($arr_tree as $item){
+        $link1 = "$link/{$item['alias']}";
+        echo "&lt;li>&lt;a href='$link1'>{$item['title']}&lt;/a>";
+        if ($item['children'])
+            getTreeMenu($item['children'],$link1);
+        echo '&lt;/li>';
+    }
+    echo '&lt;/ul>';
+}
+</pre>
+<p>Для использования сначала получаем массив  $category_degree из БД как это показано выше</p>
+<pre>
+$arr_tree_menu =  getTreeRecurs($category_degree);
+getTreeMenu($arr_tree_menu);
+</pre>
+<p>Эти функции вы можете найти в файле <b>recursive_menu.php</b></p>
