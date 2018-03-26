@@ -150,7 +150,7 @@ function getTreeRecurs($category_degree,$category_id = 0){
     return $tree;
 }
 </pre>
-<p><b>- получение вывод меню в виде HTML </b></p>
+<p><b>- Вывод меню в виде HTML </b></p>
 <pre>
 function getTreeMenu($arr_tree,$link = ''){
     echo '&lt;ul>';
