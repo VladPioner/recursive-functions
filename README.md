@@ -102,3 +102,34 @@ Array
         $category_degree[$row['parent_id']][$row['id']] = $row;
     }
 </pre>
+
+<h4>Далее есть два варианта развития событий</h4>
+<h3>1.1	Сразу из полученного массива создать меню в виде HTML</h3>
+<p>Этот вариант производительнее поэтому предпочтительнее, но имеет меньшую гибкость если Вы к примеру создаете CMS</p>
+<p>Для этого следует использовать функцию: </p>
+<pre>
+function getTreeMenuFromDegree($category_degree,$category_id = 0,$link = "http://site.com"){
+    echo '<ul>';
+    foreach ($category_degree[$category_id] as $cat){
+        $link1 = "$link/{$cat['alias']}";
+        echo "<li><a href='$link1'>{$cat['title']}</a>";
+        if($category_degree[$cat['id']])
+            getTreeMenuFromDegree($category_degree,$cat['id'],$link1);
+        echo '</li>';
+    }
+    echo '</ul>';
+}
+</pre>
+<p>Если вы не хотите чтоб в href ссылки при каждой последующей вложенности категории добавлялась родительская категория то следует убрать из функции параметр $link, а в href ссылки записываем $cat['alias']:</p>
+<pre>
+function getTreeMenuFromDegree($category_degree,$category_id = 0){
+    echo '<ul>';
+    foreach ($category_degree[$category_id] as $cat){
+        echo "<li><a href='{$cat['alias']}'>{$cat['title']}</a>";
+        if($category_degree[$cat['id']])
+            getTreeMenuFromDegree($category_degree,$cat['id'],$link1);
+        echo '</li>';
+    }
+    echo '</ul>';
+}
+</pre>
