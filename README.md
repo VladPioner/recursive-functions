@@ -9,3 +9,40 @@
 
 <h2>1. Создание меню категорий не ограниченной вложенности</h2>
 
+<p>Это меню будет создаваться из категорий которые хранятся в базе данных в таблице следующего вида:</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>alias</th>
+        <th>parent_id</th>
+        <th>title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>sportswear</td>
+        <td>0</td>
+        <td>Sportswear</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>mens</td>
+        <td>0</td>
+        <td>Mens</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>nike</td>
+        <td>1</td>
+        <td>Nike</td>
+    </tr>
+        <td>4</td>
+        <td>dior</td>
+        <td>2</td>
+        <td>Dior</td>
+    </tr>
+    </tbody>
+</table>
