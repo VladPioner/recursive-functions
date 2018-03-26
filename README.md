@@ -100,4 +100,5 @@ Array
 
     while($row = $stmp->fetch(PDO::FETCH_ASSOC)){
         $category_degree[$row['parent_id']][$row['id']] = $row;
-    }</pre>
+    }
+</pre>
