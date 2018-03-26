@@ -46,3 +46,48 @@
     </tr>
     </tbody>
 </table>
+<p>Бекап SQL таблици лежит в файле <b>category.sql</b></p>
+
+<p>Из этой таблицы нужно получить массив в котором ключи первого уровня являются id категорий которые имеют дочерние категории а ключи второго уровня это id категории значение у которого является массив с данными категории. Выглядеть он будет следующим образом:</p>
+<pre>
+Array
+(
+    [0] => Array
+        (
+            [1] => Array
+                (
+                    [id] => 1
+                    [alias] => sportswear
+                    [parent_id] => 0
+                    [title] => Sportswear
+                )
+            [2] => Array
+                (
+                    [id] => 2
+                    [alias] => mens
+                    [parent_id] => 0
+                    [title] => Mens
+                )
+        )
+    [1] => Array
+        (
+            [3] => Array
+                (
+                    [id] => 3
+                    [alias] => nike
+                    [parent_id] => 1
+                    [title] => Nike
+                )
+        )
+    [2] => Array
+        (
+            [4] => Array
+                (
+                    [id] => 4
+                    [alias] => dior
+                    [parent_id] => 4
+                    [title] => Dior
+                )
+        )
+)
+</pre>
