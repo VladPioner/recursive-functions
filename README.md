@@ -91,3 +91,14 @@ Array
         )
 )
 </pre>
+<p>Сделать  это можно следующим образом:</p>
+<pre>
+    $db = new PDO("mysql:host=localhost;dbname=test",'root','');
+
+    $sql = "SELECT * FROM category";
+    $stmp = $db->query($sql);
+
+    while($row = $stmp->fetch(PDO::FETCH_ASSOC)){
+        $category_degree[$row['parent_id']][$row['id']] = $row;
+    }
+</pre>
