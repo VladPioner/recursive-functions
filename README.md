@@ -6,6 +6,11 @@
 Если есть возможность избежать использование функций с рекурсивным вызовом, то не следует использовать эти функции. Это является следствием того, что функции с рекурсивным вызовом являются ресурсоемкими
 </p>
 <h3>Здесь представлены функции для решения следующих задач:</h3>
+<ul style="list-style-type: decimal;">
+    <li>Создание меню категорий не ограниченной вложенности</li>
+    <li>Рекурсивный обход директории с созданием массива соответствующего дереву данной директории</li>
+    <li>Рекурсивное удаление директории со всем ее содержимым</li>
+</ul>
 
 <h1>1. Создание меню категорий не ограниченной вложенности</h1>
 
@@ -170,3 +175,42 @@ $arr_tree_menu =  getTreeRecurs($category_degree);
 getTreeMenu($arr_tree_menu);
 </pre>
 <p>Эти функции вы можете найти в файле <b>recursive_menu.php</b></p>
+
+<h1>2. Рекурсивный обход директории с созданием массива соответствующего дереву данной директории</h1>
+
+<pre>
+function getTreeDir($dir){
+    $arr_return = [];
+    foreach (scandir($dir) as $dir_descendant){
+        $name_dir_des = $dir.DIRECTORY_SEPARATOR.$dir_descendant;
+        if($dir_descendant != '.' and $dir_descendant != '..'){
+            $arr_return[$dir_descendant] = $dir_descendant;
+            if(is_dir($name_dir_des)){
+                $arr_return[$dir_descendant] = getTreeDir($name_dir_des);
+            }
+        }
+    }
+    return $arr_return;
+}
+</pre>
+<p>Эту функцию вы можете найти в файле directory_recursion.php</p>
+
+<h1>3. Рекурсивное удаление директории со всем ее содержимым</h1>
+
+<pre>
+function recursiveRemoveDir($dir){
+    if(file_exists($dir)){
+        foreach (scandir($dir) as $dir_descendant){
+            $name_dir_des = $dir.DIRECTORY_SEPARATOR.$dir_descendant;
+            if($dir_descendant != '.' and $dir_descendant != '..'){
+                if(is_dir($name_dir_des))
+                    dellRecursDir($name_dir_des);
+                else
+                    unlink($name_dir_des);
+            }
+        }
+        rmdir($dir);
+    }
+}
+</pre>
+<p>Эту функцию вы можете найти в файле directory_recursion.php</p>
